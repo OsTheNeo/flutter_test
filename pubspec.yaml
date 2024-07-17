@@ -1,0 +1,35 @@
+name: catbreeds
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0-323.0.dev
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.2.1
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  cached_network_image: ^3.3.1
+
+  integration_test:
+    sdk: flutter
+  bloc_test: ^9.0.0
+  mockito: ^5.0.0
+  build_runner: ^2.1.2
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/cat_logo.png
+    - assets/image_not_found.png
