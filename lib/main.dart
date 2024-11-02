@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:catbreeds/blocs/bloc.dart';
 import 'package:catbreeds/data/repositories/cat_repository.dart';
-import 'package:catbreeds/ui/screens/splash_screen.dart';
+import 'package:catbreeds/ui/screens/intro_screen.dart';
 import 'package:catbreeds/utils/theme.dart';
 
 void main() {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Catbreeds',
         theme: appTheme,
-        home: SplashScreen(),
+        home: IntroScreen(),
       ),
     );
   }
