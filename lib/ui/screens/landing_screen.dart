@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:catbreeds/blocs/bloc.dart';
 import 'package:catbreeds/ui/widgets/cat_breed_card.dart';
 import 'package:catbreeds/ui/widgets/search_bar.dart';
+import 'package:catbreeds/ui/screens/login_screen.dart';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -22,33 +23,43 @@ class _LandingScreenState extends State<LandingScreen> {
       appBar: AppBar(
         title: Text('Catbreeds'),
       ),
-      body: Column(
-        children: [
-          CustomSearchBar(
-            onSearch: (query) {
-              BlocProvider.of<CatBreedsBloc>(context).add(SearchCatBreeds(query));
-            },
-          ),
-          Expanded(
-            child: BlocBuilder<CatBreedsBloc, CatBreedsState>(
-              builder: (context, state) {
-                if (state is CatBreedsLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is CatBreedsLoaded) {
-                  return ListView.builder(
-                    itemCount: state.breeds.length,
-                    itemBuilder: (context, index) {
-                      return CatBreedCard(breed: state.breeds[index]);
-                    },
-                  );
-                } else if (state is CatBreedsError) {
-                  return Center(child: Text(state.message));
-                }
-                return Container();
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthUnauthenticated) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+            );
+          }
+        },
+        child: Column(
+          children: [
+            CustomSearchBar(
+              onSearch: (query) {
+                BlocProvider.of<CatBreedsBloc>(context).add(SearchCatBreeds(query));
               },
             ),
-          ),
-        ],
+            Expanded(
+              child: BlocBuilder<CatBreedsBloc, CatBreedsState>(
+                builder: (context, state) {
+                  if (state is CatBreedsLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is CatBreedsLoaded) {
+                    return ListView.builder(
+                      itemCount: state.breeds.length,
+                      itemBuilder: (context, index) {
+                        return CatBreedCard(breed: state.breeds[index]);
+                      },
+                    );
+                  } else if (state is CatBreedsError) {
+                    return Center(child: Text(state.message));
+                  }
+                  return Container();
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
