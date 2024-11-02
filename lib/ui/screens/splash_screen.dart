@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:catbreeds/ui/screens/landing_screen.dart';
+import 'package:catbreeds/ui/screens/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(seconds: 2));
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => LandingScreen()),
+      MaterialPageRoute(builder: (context) => IntroScreen()),
     );
   }
 
